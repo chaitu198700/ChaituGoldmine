@@ -1,5 +1,5 @@
 count = 0;
-max_val = 10;
+max_val = 20;
 
 while count <= max_val
     disp(count);
