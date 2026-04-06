@@ -1,26 +1,6 @@
-name: SimDiff Report
-
-on:
-  push:
-    branches:
-      - main
-
-jobs:
-  simdiff:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
-
-      - name: Run SimDiff
-        run: |
-          PREV_COMMIT=$(git rev-parse HEAD~1)
-          CURR_COMMIT=$(git rev-parse HEAD)
-          simdiff $PREV_COMMIT $CURR_COMMIT > simdiff_report.txt
-
-      - name: Upload report
-        uses: actions/upload-artifact@v3
-        with:
-          name: simdiff-report
-          path: simdiff_report.txt
+- name: Run SimDiff
+  run: |
+    PREV_COMMIT=$(git rev-parse HEAD~1)
+    CURR_COMMIT=$(git rev-parse HEAD)
+    git diff $PREV_COMMIT $CURR_COMMIT > simdiff_report.txt
+    cat simdiff_report.txt
